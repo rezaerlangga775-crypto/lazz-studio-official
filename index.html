@@ -3,190 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Briefing Form | LAZZ STUDIO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>LAZZ STUDIO | ELITE DIGITAL AGENCY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #2563eb;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --border: #e2e8f0;
+        :root { --accent: #ff3c3c; --bg: #0a0a0a; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg); color: white; overflow-x: hidden; cursor: none; }
+        
+        /* Custom Cursor */
+        #cursor { width: 20px; height: 20px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 99999; box-shadow: 0 0 20px var(--accent); transition: transform 0.1s ease; }
+
+        .text-neon { text-shadow: 0 0 15px rgba(255, 60, 60, 0.8); }
+        .bg-mesh {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 60, 60, 0.05) 0%, transparent 50%);
+            z-index: -1;
         }
 
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.5s; }
+        .card-premium:hover { border-color: var(--accent); transform: translateY(-10px); background: rgba(255, 60, 60, 0.05); }
 
-        body {
-            background-color: #f1f5f9;
-            color: var(--dark);
-            padding: 50px 20px;
-            display: flex; justify-content: center;
-        }
-
-        .form-card {
-            background: white;
-            max-width: 700px; width: 100%;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-
-        .header { margin-bottom: 30px; border-left: 5px solid var(--primary); padding-left: 20px; }
-        .header h1 { font-size: 24px; color: var(--dark); }
-        .header p { font-size: 14px; color: #64748b; }
-
-        .section-title {
-            font-size: 12px; font-weight: 700; text-transform: uppercase;
-            color: var(--primary); margin: 25px 0 15px; letter-spacing: 1px;
-        }
-
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-        .input-group { margin-bottom: 15px; }
-        label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-
-        input, select, textarea {
-            width: 100%; padding: 12px 15px;
-            border: 1.5px solid var(--border); border-radius: 8px;
-            font-size: 14px; transition: 0.3s;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none; border-color: var(--primary); background: #f0f7ff;
-        }
-
-        .checkbox-group {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-            background: #f8fafc; padding: 15px; border-radius: 8px;
-        }
-
-        .checkbox-item { display: flex; align-items: center; font-size: 13px; gap: 8px; }
-        .checkbox-item input { width: auto; }
-
-        .btn-send {
-            width: 100%; padding: 16px; margin-top: 30px;
-            background: var(--primary); color: white;
-            border: none; border-radius: 8px;
-            font-size: 16px; font-weight: 700;
-            cursor: pointer; transition: 0.3s;
-        }
-
-        .btn-send:hover { background: #1d4ed8; transform: translateY(-2px); }
-
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+        #gate { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; align-items: center; justify-content: center; transition: 1s cubic-bezier(0.7, 0, 0.3, 1); }
+        
+        .badge-live { background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.5); }
+        
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .pulse { animation: pulse 2s infinite; }
     </style>
 </head>
 <body>
+    <div id="cursor"></div>
+    <div class="bg-mesh"></div>
 
-<div class="form-card">
-    <div class="header">
-        <h1>LAZZ STUDIO</h1>
-        <p>Web Development & Digital Solution Briefing</p>
+    <div id="gate">
+        <div class="text-center">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter italic text-neon">LAZZ STUDIO</h1>
+            <p class="text-gray-500 mb-10 text-[10px] tracking-[0.5em] uppercase font-bold">Encrypted Connection Established</p>
+            <button onclick="unlock()" class="px-16 py-5 bg-red-600 rounded-full font-black hover:scale-110 transition shadow-[0_0_50px_rgba(220,38,38,0.5)] tracking-[0.2em] uppercase">Enter System</button>
+        </div>
     </div>
 
-    <form id="webForm">
-        <div class="section-title">Informasi Klien</div>
-        <div class="grid">
-            <div class="input-group">
-                <label>Nama / Brand</label>
-                <input type="text" id="nama" placeholder="Nama Anda/Perusahaan" required>
-            </div>
-            <div class="input-group">
-                <label>Telegram Klien</label>
-                <input type="text" id="tele" placeholder="@username_anda" required>
-            </div>
+    <nav class="fixed w-full z-50 p-6 flex justify-between items-center backdrop-blur-md border-b border-white/5">
+        <div class="text-2xl font-black tracking-tighter">LS<span class="text-red-500">.</span></div>
+        <div class="hidden md:flex gap-10 text-[10px] font-bold tracking-[0.2em] uppercase">
+            <a href="#services" class="hover:text-red-500 transition">Services</a>
+            <a href="#about" class="hover:text-red-500 transition">Infrastructure</a>
+            <a href="https://t.me/LazzStudioOfficial" class="text-red-500">Live Status: Operational</a>
         </div>
+        <a href="https://t.me/LazzStudioOfficial" target="_blank" class="px-8 py-3 bg-red-600 rounded-full text-[10px] font-black tracking-widest hover:bg-red-700 transition">CONSULTATION</a>
+    </nav>
 
-        <div class="section-title">Detail Proyek Website</div>
-        <div class="input-group">
-            <label>Tipe Website</label>
-            <select id="tipe">
-                <option value="Landing Page (1 Halaman)">Landing Page (1 Halaman)</option>
-                <option value="Company Profile">Company Profile</option>
-                <option value="E-Commerce (Toko Online)">E-Commerce (Toko Online)</option>
-                <option value="Portfolio / Personal">Portfolio / Personal</option>
-                <option value="Custom Web App">Custom Web App</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <label>Fitur Tambahan yang Dibutuhkan:</label>
-            <div class="checkbox-group">
-                <div class="checkbox-item"><input type="checkbox" name="fitur" value="SEO"> SEO Optimized</div>
-                <div class="checkbox-item"><input type="checkbox" name="fitur" value="Payment"> Payment Gateway</div>
-                <div class="checkbox-item"><input type="checkbox" name="fitur" value="Chat"> Live Chat/WA Bot</div>
-                <div class="checkbox-item"><input type="checkbox" name="fitur" value="CMS"> Admin Panel (CMS)</div>
+    <section class="pt-56 pb-20 px-6 text-center">
+        <div class="flex justify-center mb-10">
+            <div class="px-4 py-1 badge-live rounded-full text-[9px] font-black tracking-widest uppercase flex items-center">
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-2 pulse"></span> System Online
             </div>
         </div>
+        <h2 class="text-6xl md:text-9xl font-black mb-6 leading-[0.85] italic tracking-tighter uppercase">ARCHITECTS OF<br><span class="text-red-500 text-neon">THE FUTURE.</span></h2>
+        <p class="max-w-2xl mx-auto text-gray-500 text-sm md:text-base mt-10 leading-relaxed font-medium">Bukan sekadar kode. Kami membangun ekosistem digital yang dirancang untuk performa tinggi, keamanan maksimal, dan eksklusivitas.</p>
+        
+        <div class="mt-20 flex justify-center gap-10 md:gap-20 border-y border-white/5 py-10">
+            <div class="text-center"><p class="text-3xl font-black italic">50+</p><p class="text-[10px] text-gray-600 font-bold uppercase tracking-widest">Projects Done</p></div>
+            <div class="text-center"><p class="text-3xl font-black italic">100%</p><p class="text-[10px] text-gray-600 font-bold uppercase tracking-widest">Secure Cloud</p></div>
+            <div class="text-center"><p class="text-3xl font-black italic">24h</p><p class="text-[10px] text-gray-600 font-bold uppercase tracking-widest">Delivery Time</p></div>
+        </div>
+    </section>
 
-        <div class="grid">
-            <div class="input-group">
-                <label>Sudah Ada Domain & Hosting?</label>
-                <select id="hosting">
-                    <option value="Sudah Ada">Sudah Ada</option>
-                    <option value="Belum Ada (Butuh Jasa Setup)">Belum Ada (Butuh Jasa Setup)</option>
-                </select>
+    <section id="services" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass p-12 rounded-[50px] card-premium flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xs font-black mb-10 tracking-[0.3em] text-gray-500 uppercase">T01 - STARTER</h3>
+                    <p class="text-5xl font-black mb-4 tracking-tighter">250<span class="text-sm font-bold text-gray-600 italic">.K</span></p>
+                    <ul class="space-y-5 text-xs text-gray-400 mb-10 font-medium">
+                        <li><i class="fas fa-microchip text-red-500 mr-3"></i> Advanced HTML/CSS Core</li>
+                        <li><i class="fas fa-bolt text-red-500 mr-3"></i> Ultra Fast Load Speed</li>
+                        <li><i class="fas fa-shield-halved text-red-500 mr-3"></i> Secure Code Structure</li>
+                    </ul>
+                </div>
+                <button onclick="openPay('STARTER PACKAGE', '250.000')" class="w-full py-5 bg-white text-black rounded-3xl font-black text-xs tracking-widest uppercase hover:bg-red-600 hover:text-white transition-all">Acquire Plan</button>
             </div>
-            <div class="input-group">
-                <label>Estimasi Deadline</label>
-                <input type="date" id="deadline" required>
+
+            <div class="glass p-12 rounded-[50px] border-red-500/40 card-premium bg-gradient-to-br from-red-600/10 to-transparent flex flex-col justify-between scale-105 shadow-[0_30px_100px_rgba(255,0,0,0.1)]">
+                <div class="relative">
+                    <div class="absolute -top-16 right-0 text-red-500 text-[10px] font-black tracking-widest italic uppercase">Best Seller</div>
+                    <h3 class="text-xs font-black mb-10 tracking-[0.3em] text-red-500 uppercase">T02 - PROFESSIONAL</h3>
+                    <p class="text-5xl font-black mb-4 tracking-tighter">550<span class="text-sm font-bold text-gray-600 italic">.K</span></p>
+                    <ul class="space-y-5 text-xs text-gray-300 mb-10 font-medium">
+                        <li><i class="fas fa-cloud text-red-500 mr-3"></i> Auto-Deployment Vercel</li>
+                        <li><i class="fas fa-link text-red-500 mr-3"></i> Sub-domain Integration</li>
+                        <li><i class="fas fa-wand-magic-sparkles text-red-500 mr-3"></i> 3 Premium Revisions</li>
+                        <li><i class="fas fa-code-merge text-red-500 mr-3"></i> Dynamic Animations</li>
+                    </ul>
+                </div>
+                <button onclick="openPay('PROFESSIONAL PLAN', '550.000')" class="w-full py-5 bg-red-600 text-white rounded-3xl font-black text-xs tracking-widest uppercase shadow-xl shadow-red-600/40">Acquire Plan</button>
+            </div>
+
+            <div class="glass p-12 rounded-[50px] card-premium flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xs font-black mb-10 tracking-[0.3em] text-gray-500 uppercase">T03 - ELITE VIP</h3>
+                    <p class="text-5xl font-black mb-4 tracking-tighter text-neon text-red-500">1.5<span class="text-sm font-bold text-gray-600 italic">.JT+</span></p>
+                    <ul class="space-y-5 text-xs text-gray-400 mb-10 font-medium">
+                        <li><i class="fas fa-globe text-red-500 mr-3"></i> Custom Premium Domain</li>
+                        <li><i class="fas fa-magnifying-glass-chart text-red-500 mr-3"></i> Full SEO Optimization</li>
+                        <li><i class="fas fa-user-shield text-red-500 mr-3"></i> Lifetime VIP Support</li>
+                    </ul>
+                </div>
+                <a href="https://t.me/LazzStudioOfficial" target="_blank" class="w-full py-5 border border-white/20 rounded-3xl font-black text-xs tracking-widest uppercase text-center hover:bg-white hover:text-black transition-all">Direct Admin</a>
             </div>
         </div>
+    </section>
 
-        <div class="input-group">
-            <label>Referensi Web (Copy link web yang disukai)</label>
-            <input type="url" id="ref" placeholder="https://contoh-web.com">
+    <div class="fixed bottom-6 left-6 z-50">
+        <div class="px-4 py-2 glass rounded-full text-[9px] font-black tracking-widest uppercase flex items-center">
+            <span class="w-2 h-2 bg-red-600 rounded-full mr-2 pulse"></span> Server: SG-1 (Active)
         </div>
+    </div>
 
-        <div class="input-group">
-            <label>Brief Lengkap & Struktur Menu</label>
-            <textarea id="brief" rows="4" placeholder="Jelaskan menu apa saja yang ingin ada di web..." required></textarea>
+    <div id="modal" class="fixed inset-0 z-[999] hidden flex items-center justify-center p-6 bg-black/98 backdrop-blur-3xl transition-all">
+        <div class="glass p-10 md:p-14 rounded-[50px] max-w-md w-full border-2 border-red-600 shadow-[0_0_80px_rgba(255,0,0,0.2)]">
+            <h4 id="mTitle" class="text-3xl font-black mb-2 uppercase italic text-red-500 tracking-tighter">PACKAGE</h4>
+            <p id="mPrice" class="text-gray-500 mb-10 font-bold text-xs uppercase tracking-widest"></p>
+            
+            <div class="space-y-4">
+                <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012012025041283608451" target="_blank" class="flex items-center justify-between p-6 bg-blue-600 rounded-3xl font-black text-xs tracking-[0.2em] uppercase shadow-lg shadow-blue-600/20">
+                    DANA INSTANT <i class="fas fa-bolt"></i>
+                </a>
+                <div onclick="copyText('081339286344')" class="p-6 bg-white/5 rounded-3xl border border-white/10 cursor-pointer group transition hover:bg-white/10">
+                    <p class="text-[9px] text-gray-500 mb-2 font-black tracking-widest uppercase">Dana Transfer (Manual)</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-black tracking-tighter">0813 3928 6344</span>
+                        <i class="fas fa-copy text-gray-600 group-hover:text-white"></i>
+                    </div>
+                    <p class="text-[10px] text-red-500 font-black mt-2 tracking-widest uppercase">A/N HASAN</p>
+                </div>
+            </div>
+            <button onclick="document.getElementById('modal').style.display='none'" class="mt-10 text-gray-600 font-black text-[9px] tracking-[0.4em] uppercase hover:text-white transition w-full">Close Interface</button>
         </div>
+    </div>
 
-        <button type="button" class="btn-send" onclick="sendTelegram()">KIRIM BRIEF KE LAZZ STUDIO</button>
-    </form>
-</div>
-
-<script>
-    function sendTelegram() {
-        const nama = document.getElementById('nama').value;
-        const tele = document.getElementById('tele').value;
-        const tipe = document.getElementById('tipe').value;
-        const hosting = document.getElementById('hosting').value;
-        const deadline = document.getElementById('deadline').value;
-        const ref = document.getElementById('ref').value || '-';
-        const brief = document.getElementById('brief').value;
-
-        // Ambil fitur dari checkbox
-        let fitur = [];
-        document.querySelectorAll('input[name="fitur"]:checked').forEach((checkbox) => {
-            fitur.push(checkbox.value);
+    <script>
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
         });
-        const fiturFix = fitur.length > 0 ? fitur.join(", ") : "Standar";
 
-        if(!nama || !tele || !brief) {
-            alert("Harap isi data penting (Nama, Tele, dan Brief)!");
-            return;
+        function unlock() {
+            const g = document.getElementById('gate');
+            g.style.opacity = '0';
+            g.style.transform = 'translateY(-100%)';
+            setTimeout(() => g.style.display = 'none', 1000);
         }
 
-        const pesan = `🌐 *NEW WEB PROJECT REQUEST*%0A` +
-                      `----------------------------------%0A` +
-                      `👤 *Klien:* ${nama}%0A` +
-                      `📱 *Tele:* ${tele}%0A` +
-                      `🖥 *Tipe Web:* ${tipe}%0A` +
-                      `🛠 *Fitur:* ${fiturFix}%0A` +
-                      `📦 *Host/Domain:* ${hosting}%0A` +
-                      `📅 *Deadline:* ${deadline}%0A` +
-                      `🔗 *Ref:* ${ref}%0A` +
-                      `📝 *Brief:* ${brief}%0A` +
-                      `----------------------------------%0A` +
-                      `_Sent from Lazz Web Form_`;
+        function openPay(name, price) {
+            document.getElementById('mTitle').innerText = name;
+            document.getElementById('mPrice').innerText = "Investment: Rp " + price;
+            document.getElementById('modal').style.display = 'flex';
+        }
 
-        window.open(`https://t.me/LazzStudioOfficial?text=${pesan}`, '_blank');
-    }
-</script>
-
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert("Nomor DANA berhasil disalin ke clipboard!");
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAZZ PORTAL | Registration System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        body { background-color: #020617; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .card-active { border: 2px solid #6366f1 !important; background: rgba(99, 102, 241, 0.08); transform: scale(1.02); }
+        .text-gradient { background: linear-gradient(to right, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hidden-el { display: none; }
+        input:checked + label { border-color: #6366f1; background: rgba(99, 102, 241, 0.1); }
+    </style>
+</head>
+<body class="pb-32">
+
+    <nav class="fixed w-full z-50 glass px-6 py-4">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-800 tracking-tighter text-gradient font-bold italic">LAZZ<span class="text-white">PORTAL</span></div>
+            <div class="text-[10px] text-indigo-400 font-bold tracking-widest uppercase">System v2.0</div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-6 pt-32">
+        <div class="mb-12 text-center">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Web Dev" class="w-full h-48 object-cover rounded-3xl mb-8 opacity-60 grayscale hover:grayscale-0 transition duration-500">
+            <h1 class="text-4xl font-extrabold mb-4">Konfigurasi <span class="text-gradient font-black">Project Lu.</span></h1>
+            <p class="text-gray-400 text-sm">Pilih fitur, hitung biaya, langsung gas pengerjaan.</p>
+        </div>
+
+        <section class="mb-12">
+            <h2 class="text-sm font-bold mb-6 text-indigo-400 uppercase tracking-widest italic">01. Paket Utama</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div id="p-500" onclick="setPkg(500000, 'Web File Only', 'p-500', false)" class="glass p-6 rounded-2xl cursor-pointer border border-white/5 transition-all">
+                    <i class="fas fa-file-code text-2xl mb-4 text-indigo-500"></i>
+                    <h3 class="font-bold">File Only</h3>
+                    <p class="text-xs text-gray-500 mt-1">Hanya source code.</p>
+                    <p class="text-xl font-black mt-4">Rp 500k</p>
+                </div>
+                <div id="p-990" onclick="setPkg(990000, 'Complete Link', 'p-990', false)" class="glass p-6 rounded-2xl cursor-pointer border border-white/5 transition-all card-active">
+                    <i class="fas fa-bolt text-2xl mb-4 text-indigo-500"></i>
+                    <h3 class="font-bold">Complete Link</h3>
+                    <p class="text-xs text-gray-500 mt-1">Terima link aktif.</p>
+                    <p class="text-xl font-black mt-4">Rp 990k</p>
+                </div>
+                <div id="p-1500" onclick="setPkg(1500000, 'Request Plus', 'p-1500', true)" class="glass p-6 rounded-2xl cursor-pointer border border-white/5 transition-all">
+                    <i class="fas fa-crown text-2xl mb-4 text-indigo-500"></i>
+                    <h3 class="font-bold">Request Plus</h3>
+                    <p class="text-xs text-gray-500 mt-1">Bebas custom & domain.</p>
+                    <p class="text-xl font-black mt-4">Rp 1.5jt</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-sm font-bold mb-6 text-indigo-400 uppercase tracking-widest italic">02. Fitur Tambahan (Recommended)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="relative">
+                    <input type="checkbox" id="f-seo" value="200000" onchange="updateTotal()" class="hidden-el peer">
+                    <label for="f-seo" class="block glass p-5 rounded-2xl border border-white/5 cursor-pointer peer-checked:border-indigo-500 transition">
+                        <i class="fas fa-search-dollar text-indigo-400 mb-2"></i>
+                        <h4 class="text-sm font-bold">SEO Turbo</h4>
+                        <p class="text-[10px] text-gray-500">Gampang dicari di Google.</p>
+                        <p class="text-xs font-bold mt-2 text-indigo-300">+200k</p>
+                    </label>
+                </div>
+                <div class="relative">
+                    <input type="checkbox" id="f-ssl" value="150000" onchange="updateTotal()" class="hidden-el peer">
+                    <label for="f-ssl" class="block glass p-5 rounded-2xl border border-white/5 cursor-pointer peer-checked:border-indigo-500 transition">
+                        <i class="fas fa-shield-alt text-indigo-400 mb-2"></i>
+                        <h4 class="text-sm font-bold">Security SSL</h4>
+                        <p class="text-[10px] text-gray-500">Web aman dari hacker.</p>
+                        <p class="text-xs font-bold mt-2 text-indigo-300">+150k</p>
+                    </label>
+                </div>
+                <div class="relative">
+                    <input type="checkbox" id="f-maint" value="100000" onchange="updateTotal()" class="hidden-el peer">
+                    <label for="f-maint" class="block glass p-5 rounded-2xl border border-white/5 cursor-pointer peer-checked:border-indigo-500 transition">
+                        <i class="fas fa-tools text-indigo-400 mb-2"></i>
+                        <h4 class="text-sm font-bold">Maintenance</h4>
+                        <p class="text-[10px] text-gray-500">Update rutin bulanan.</p>
+                        <p class="text-xs font-bold mt-2 text-indigo-300">+100k</p>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-sm font-bold mb-6 text-indigo-400 uppercase tracking-widest italic">03. Level Kecepatan</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div id="s-0" onclick="setSpeed(0, 'Normal (4 Hari)', 's-0')" class="glass p-4 rounded-xl cursor-pointer border border-white/5 text-center transition card-active">
+                    <p class="font-bold text-xs">4 Hari</p>
+                    <p class="text-[10px] text-green-400 font-bold">GRATIS</p>
+                </div>
+                <div id="s-100" onclick="setSpeed(100000, 'Fast (3 Hari)', 's-100')" class="glass p-4 rounded-xl cursor-pointer border border-white/5 text-center transition">
+                    <p class="font-bold text-xs">3 Hari</p>
+                    <p class="text-[10px] text-indigo-300">+100k</p>
+                </div>
+                <div id="s-200" onclick="setSpeed(200000, 'Super (2 Hari)', 's-200')" class="glass p-4 rounded-xl cursor-pointer border border-white/5 text-center transition">
+                    <p class="font-bold text-xs">2 Hari</p>
+                    <p class="text-[10px] text-indigo-300">+200k</p>
+                </div>
+                <div id="s-400" onclick="setSpeed(400000, 'Turbo (1 Hari)', 's-400')" class="glass p-4 rounded-xl cursor-pointer border border-white/5 text-center transition">
+                    <p class="font-bold text-xs italic">1 Hari</p>
+                    <p class="text-[10px] text-yellow-400 font-bold">+400k</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <h2 class="text-sm font-bold mb-6 text-indigo-400 uppercase tracking-widest italic">04. Detail Informasi</h2>
+            <div class="space-y-4">
+                <input type="text" id="webName" placeholder="Nama Website Lu..." class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-indigo-500 transition">
+                
+                <div id="domainContainer" class="hidden-el">
+                    <input type="text" id="domainReq" placeholder="Mau Nama Domain Apa? (Contoh: shoplazz.com)" class="w-full bg-indigo-500/10 border border-indigo-500/30 p-4 rounded-2xl outline-none focus:border-indigo-500 transition">
+                </div>
+
+                <textarea id="webNote" placeholder="Ada request tambahan atau fitur khusus?" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-indigo-500 transition h-28"></textarea>
+            </div>
+        </section>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-4xl glass p-6 rounded-[2.5rem] border border-indigo-500/30 shadow-2xl z-50">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Total Estimasi</p>
+                    <h2 id="totalDisplay" class="text-3xl font-black text-white italic">Rp 990.000</h2>
+                </div>
+                <button onclick="sendToTele()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                    GAS ORDER <i class="fab fa-telegram-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let pkgPrice = 990000;
+        let pkgName = "Complete Link";
+        let speedPrice = 0;
+        let speedName = "Normal (4 Hari)";
+
+        function setPkg(price, name, id, showDomain) {
+            pkgPrice = price;
+            pkgName = name;
+            document.querySelectorAll('[id^="p-"]').forEach(el => el.classList.remove('card-active'));
+            document.getElementById(id).classList.add('card-active');
+            
+            const domainBox = document.getElementById('domainContainer');
+            if(showDomain) {
+                domainBox.classList.remove('hidden-el');
+            } else {
+                domainBox.classList.add('hidden-el');
+            }
+            updateTotal();
+        }
+
+        function setSpeed(price, name, id) {
+            speedPrice = price;
+            speedName = name;
+            document.querySelectorAll('[id^="s-"]').forEach(el => el.classList.remove('card-active'));
+            document.getElementById(id).classList.add('card-active');
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let addOnPrice = 0;
+            if(document.getElementById('f-seo').checked) addOnPrice += 200000;
+            if(document.getElementById('f-ssl').checked) addOnPrice += 150000;
+            if(document.getElementById('f-maint').checked) addOnPrice += 100000;
+
+            let total = pkgPrice + speedPrice + addOnPrice;
+            document.getElementById('totalDisplay').innerText = "Rp " + total.toLocaleString('id-ID');
+        }
+
+        function sendToTele() {
+            const webName = document.getElementById('webName').value || "-";
+            const domain = document.getElementById('domainReq').value || "Default Admin";
+            const note = document.getElementById('webNote').value || "-";
+            
+            let extras = [];
+            if(document.getElementById('f-seo').checked) extras.push("SEO Turbo");
+            if(document.getElementById('f-ssl').checked) extras.push("Security SSL");
+            if(document.getElementById('f-maint').checked) extras.push("Maintenance");
+
+            const total = document.getElementById('totalDisplay').innerText;
+
+            const message = `Halo Admin Lazz Studio! %0A%0A` +
+                            `SAYA MAU ORDER WEBSITE %0A` +
+                            `--------------------------------%0A` +
+                            `📦 Paket: ${pkgName} %0A` +
+                            `⚡ Speed: ${speedName} %0A` +
+                            `✨ Fitur: ${extras.join(", ") || "Standard"} %0A` +
+                            `🏠 Nama Web: ${webName} %0A` +
+                            `🌐 Domain: ${domain} %0A` +
+                            `📝 Note: ${note} %0A` +
+                            `--------------------------------%0A` +
+                            `💰 TOTAL: ${total} %0A%0A` +
+                            `Mohon diproses ya admin!`;
+
+            window.open(`https://t.me/LazzStudioOfficial?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>

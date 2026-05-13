@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Briefing Form | LAZZ STUDIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            padding: 50px 20px;
+            display: flex; justify-content: center;
+        }
+
+        .form-card {
+            background: white;
+            max-width: 700px; width: 100%;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .header { margin-bottom: 30px; border-left: 5px solid var(--primary); padding-left: 20px; }
+        .header h1 { font-size: 24px; color: var(--dark); }
+        .header p { font-size: 14px; color: #64748b; }
+
+        .section-title {
+            font-size: 12px; font-weight: 700; text-transform: uppercase;
+            color: var(--primary); margin: 25px 0 15px; letter-spacing: 1px;
+        }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+
+        input, select, textarea {
+            width: 100%; padding: 12px 15px;
+            border: 1.5px solid var(--border); border-radius: 8px;
+            font-size: 14px; transition: 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none; border-color: var(--primary); background: #f0f7ff;
+        }
+
+        .checkbox-group {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+            background: #f8fafc; padding: 15px; border-radius: 8px;
+        }
+
+        .checkbox-item { display: flex; align-items: center; font-size: 13px; gap: 8px; }
+        .checkbox-item input { width: auto; }
+
+        .btn-send {
+            width: 100%; padding: 16px; margin-top: 30px;
+            background: var(--primary); color: white;
+            border: none; border-radius: 8px;
+            font-size: 16px; font-weight: 700;
+            cursor: pointer; transition: 0.3s;
+        }
+
+        .btn-send:hover { background: #1d4ed8; transform: translateY(-2px); }
+
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="form-card">
+    <div class="header">
+        <h1>LAZZ STUDIO</h1>
+        <p>Web Development & Digital Solution Briefing</p>
+    </div>
+
+    <form id="webForm">
+        <div class="section-title">Informasi Klien</div>
+        <div class="grid">
+            <div class="input-group">
+                <label>Nama / Brand</label>
+                <input type="text" id="nama" placeholder="Nama Anda/Perusahaan" required>
+            </div>
+            <div class="input-group">
+                <label>Telegram Klien</label>
+                <input type="text" id="tele" placeholder="@username_anda" required>
+            </div>
+        </div>
+
+        <div class="section-title">Detail Proyek Website</div>
+        <div class="input-group">
+            <label>Tipe Website</label>
+            <select id="tipe">
+                <option value="Landing Page (1 Halaman)">Landing Page (1 Halaman)</option>
+                <option value="Company Profile">Company Profile</option>
+                <option value="E-Commerce (Toko Online)">E-Commerce (Toko Online)</option>
+                <option value="Portfolio / Personal">Portfolio / Personal</option>
+                <option value="Custom Web App">Custom Web App</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Fitur Tambahan yang Dibutuhkan:</label>
+            <div class="checkbox-group">
+                <div class="checkbox-item"><input type="checkbox" name="fitur" value="SEO"> SEO Optimized</div>
+                <div class="checkbox-item"><input type="checkbox" name="fitur" value="Payment"> Payment Gateway</div>
+                <div class="checkbox-item"><input type="checkbox" name="fitur" value="Chat"> Live Chat/WA Bot</div>
+                <div class="checkbox-item"><input type="checkbox" name="fitur" value="CMS"> Admin Panel (CMS)</div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="input-group">
+                <label>Sudah Ada Domain & Hosting?</label>
+                <select id="hosting">
+                    <option value="Sudah Ada">Sudah Ada</option>
+                    <option value="Belum Ada (Butuh Jasa Setup)">Belum Ada (Butuh Jasa Setup)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Estimasi Deadline</label>
+                <input type="date" id="deadline" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Referensi Web (Copy link web yang disukai)</label>
+            <input type="url" id="ref" placeholder="https://contoh-web.com">
+        </div>
+
+        <div class="input-group">
+            <label>Brief Lengkap & Struktur Menu</label>
+            <textarea id="brief" rows="4" placeholder="Jelaskan menu apa saja yang ingin ada di web..." required></textarea>
+        </div>
+
+        <button type="button" class="btn-send" onclick="sendTelegram()">KIRIM BRIEF KE LAZZ STUDIO</button>
+    </form>
+</div>
+
+<script>
+    function sendTelegram() {
+        const nama = document.getElementById('nama').value;
+        const tele = document.getElementById('tele').value;
+        const tipe = document.getElementById('tipe').value;
+        const hosting = document.getElementById('hosting').value;
+        const deadline = document.getElementById('deadline').value;
+        const ref = document.getElementById('ref').value || '-';
+        const brief = document.getElementById('brief').value;
+
+        // Ambil fitur dari checkbox
+        let fitur = [];
+        document.querySelectorAll('input[name="fitur"]:checked').forEach((checkbox) => {
+            fitur.push(checkbox.value);
+        });
+        const fiturFix = fitur.length > 0 ? fitur.join(", ") : "Standar";
+
+        if(!nama || !tele || !brief) {
+            alert("Harap isi data penting (Nama, Tele, dan Brief)!");
+            return;
+        }
+
+        const pesan = `🌐 *NEW WEB PROJECT REQUEST*%0A` +
+                      `----------------------------------%0A` +
+                      `👤 *Klien:* ${nama}%0A` +
+                      `📱 *Tele:* ${tele}%0A` +
+                      `🖥 *Tipe Web:* ${tipe}%0A` +
+                      `🛠 *Fitur:* ${fiturFix}%0A` +
+                      `📦 *Host/Domain:* ${hosting}%0A` +
+                      `📅 *Deadline:* ${deadline}%0A` +
+                      `🔗 *Ref:* ${ref}%0A` +
+                      `📝 *Brief:* ${brief}%0A` +
+                      `----------------------------------%0A` +
+                      `_Sent from Lazz Web Form_`;
+
+        window.open(`https://t.me/LazzStudioOfficial?text=${pesan}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
